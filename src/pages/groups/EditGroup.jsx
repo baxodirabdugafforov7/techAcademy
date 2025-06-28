@@ -88,7 +88,7 @@ const EditGroup = () => {
                   onClick={() => setShowAssignModal(true)}
                   className="px-3 py-2 bg-blue-600 text-white rounded text-sm"
                 >
-                   Edit Students
+                  Edit Students
                 </button>
               </div>
               <AssignedStudentList assignedStudents={group.students || []} />
@@ -130,6 +130,7 @@ const EditGroup = () => {
               </div>
               <AssignedStudentList assignedStudents={group.students || []} />
 
+
               <div className="flex justify-between items-center mt-8">
                 <h3 className="text-lg font-semibold">Attendance</h3>
                 <button
@@ -139,7 +140,58 @@ const EditGroup = () => {
                   Manage Attendance
                 </button>
               </div>
-              <AttendanceList records={attendanceRecords} />
+
+              {attendanceRecords.length > 0 && (
+                <div className="mt-6">
+                  <h3 className="font-semibold text-lg mb-4">Attendance Overview</h3>
+
+                  <div className="overflow-auto max-w-5xl rounded-lg shadow border bg-white">
+                    <table className="min-w-full text-sm text-left border-collapse">
+                      <thead>
+                        <tr className="bg-gray-100 border-b">
+                          <th className="px-4 py-3 font-semibold text-gray-700 text-left whitespace-nowrap border-r">
+                            Date
+                          </th>
+                          {group.students.map((student) => (
+                            <th
+                              key={student.id}
+                              className="px-4 py-3 font-semibold text-gray-700 text-left whitespace-nowrap border-r"
+                            >
+                              {student.fullName}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {Object.entries(
+                          attendanceRecords.reduce((acc, record) => {
+                            if (!acc[record.date]) acc[record.date] = {};
+                            acc[record.date][record.studentId] = record.status;
+                            return acc;
+                          }, {})
+                        ).map(([date, row], index) => (
+                          <tr
+                            key={date}
+                            className={`${index % 2 === 0 ? "bg-white" : "bg-gray-50"} border-b hover:bg-gray-100`}
+                          >
+                            <td className="px-4 py-2 font-medium text-gray-800 border-r">
+                              {date}
+                            </td>
+                            {group.students.map((student) => (
+                              <td
+                                key={student.id}
+                                className="px-4 py-2 text-gray-700 text-center capitalize border-r"
+                              >
+                                {row[student.id] || "-"}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
 
 
               <div className="flex justify-end mt-8 gap-4">
