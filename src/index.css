@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+/* src/styles/global.css */
+:root {
+  /* === Primary Colors === */
+  --color-primary-1: #001f54;
+  --color-primary-2: #87ceeb;
+  --color-primary-3: #50c878;
+  --color-primary-4: #228b22;
+  --color-primary-5: #6a0dad;
+  --color-primary-6: #e6e6fa;
+
+  /* === Secondary Colors === */
+  --color-secondary-1: #daa520;
+  --color-secondary-2: #fff44f;
+  --color-secondary-3: #ff7f50;
+  --color-secondary-4: #f28500;
+  --color-secondary-5: #a9a9a9;
+  --color-secondary-6: #36454f;
+
+  /* === Accent Colors === */
+  --color-accent-1: #ff6347;
+  --color-accent-2: #40e0d0;
+  --color-accent-3: #40e0d0;
+  --color-accent-4: #40e0d0;
+  --color-accent-5: #ff6347;
+  --color-accent-6: #40e0d0;
+  --color-accent-7: #40e0d0;
+  --color-accent-8: #ff6347;
+}
+
+html {
+  font-family: "Montserrat", sans-serif;
+}
+
+
+
