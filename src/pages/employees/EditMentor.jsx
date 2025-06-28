@@ -148,11 +148,12 @@ const EditMentor = () => {
                   }
                   className="w-full mt-1 px-4 py-2 border border-gray-300 focus:ring-2 focus:ring-red-500 focus:outline-none transition-all"
                 >
-                  {courses.map((course) => (
-                    <option key={course.id} value={course.id}>
+                  {courses.map((course, index) => (
+                    <option key={course.id || index} value={course.id || `course-${index}`}>
                       {course.name}
                     </option>
                   ))}
+
                 </select>
               </div>
 
@@ -199,10 +200,19 @@ const EditMentor = () => {
                 <div className="bg-gray-100 border rounded-md p-2 mt-1 max-h-32 overflow-y-auto">
                   <ul className="list-disc pl-5 text-sm">
                     {selectedGroup.studentIds.map((sid) => {
-                      const student = students.find((s) => s.id === sid);
-                      return <li key={sid}>{student?.name || "Unknown Student"}</li>;
+                      const student =
+                        selectedGroup.students?.find((s) => s.id === sid) ||
+                        students.find((s) => s.id === sid);
+                      return (
+                        <li key={sid}>
+                          {student ? student.fullName : `Unknown Student (${sid})`}
+                        </li>
+                      );
                     })}
+
+
                   </ul>
+
                 </div>
               </div>
             </div>
